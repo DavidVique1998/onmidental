@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
-import { ArrowRight, ChevronDown, Star } from "lucide-react";
+import { ArrowRight, ChevronDown, Star, StarHalf } from "lucide-react";
 
 const ToothScene = dynamic(() => import("./ToothScene"), { ssr: false });
 
@@ -112,17 +112,13 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-2">
                   <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star
-                        key={s}
-                        size={13}
-                        className={
-                          s <= 4
-                            ? "text-[#F5A623] fill-[#F5A623]"
-                            : "text-[#111111]/10 fill-[#111111]/10"
-                        }
-                      />
-                    ))}
+                    {[1, 2, 3, 4, 5].map((s) =>
+                      s === 5 ? (
+                        <StarHalf key={s} size={13} className="text-[#F5A623] fill-[#F5A623]" />
+                      ) : (
+                        <Star key={s} size={13} className="text-[#F5A623] fill-[#F5A623]" />
+                      )
+                    )}
                   </div>
                   <span className="text-[#111111] font-bold text-sm">4.5</span>
                   <span className="text-[#111111]/40 text-xs">· 58 reseñas Google</span>
@@ -213,17 +209,13 @@ export default function Hero() {
                       <div className="flex items-baseline gap-1.5">
                         <p className="text-[#111111] font-extrabold text-base leading-none">4.5</p>
                         <div className="flex gap-px">
-                          {[1, 2, 3, 4, 5].map((s) => (
-                            <Star
-                              key={s}
-                              size={10}
-                              className={
-                                s <= 4
-                                  ? "text-[#F5A623] fill-[#F5A623]"
-                                  : "text-[#111111]/10 fill-[#111111]/10"
-                              }
-                            />
-                          ))}
+                          {[1, 2, 3, 4, 5].map((s) =>
+                            s === 5 ? (
+                              <StarHalf key={s} size={10} className="text-[#F5A623] fill-[#F5A623]" />
+                            ) : (
+                              <Star key={s} size={10} className="text-[#F5A623] fill-[#F5A623]" />
+                            )
+                          )}
                         </div>
                       </div>
                       <p className="text-[#111111]/40 text-[11px] mt-0.5">58 reseñas Google</p>
