@@ -155,59 +155,95 @@ onmidental/
 
 ---
 
-## Tools Used in This Project
+## Tools & Recommendations
 
-### SEO
+### Already Included in This Repo ✅
+
+| What | Where |
+|------|-------|
+| Auto-generated sitemap.xml | `app/sitemap.ts` |
+| robots.txt | `app/robots.ts` |
+| JSON-LD structured data (LocalBusiness + Dentist) | `app/layout.tsx` |
+| Open Graph + Twitter Card meta tags | `app/layout.tsx` |
+| Geo tags (region, lat/lng) | `app/layout.tsx` |
+| Google Analytics 4 (activates with `NEXT_PUBLIC_GA_ID`) | `lib/gtag.ts` + `app/layout.tsx` |
+| AI chat widget (Gemini) | `components/ChatWidget.tsx` + `app/api/chat/route.ts` |
+| WhatsApp floating button | `components/WhatsAppButton.tsx` |
+| 3D scroll-driven model | `components/ToothScene.tsx` |
+
+### Recommended External Tools (not in code)
+
+#### SEO
 | Tool | Purpose |
 |------|---------|
-| [Google Search Console](https://search.google.com/search-console) | Index status, search performance, Core Web Vitals |
-| [Ahrefs / Semrush](https://ahrefs.com) | Keyword research, backlink analysis, competitor audit |
-| [Schema.org validator](https://validator.schema.org) | Validate JSON-LD structured data |
-| [PageSpeed Insights](https://pagespeed.web.dev) | Core Web Vitals, LCP, CLS, FID |
-| Next.js sitemap + robots | Auto-generated via `app/sitemap.ts` and `app/robots.ts` |
+| [Google Search Console](https://search.google.com/search-console) | Index status, keyword performance, Core Web Vitals |
+| [PageSpeed Insights](https://pagespeed.web.dev) | LCP, CLS, FID audit |
+| [Schema.org validator](https://validator.schema.org) | Validate the JSON-LD already in this repo |
+| [Ahrefs / Semrush](https://ahrefs.com) | Keyword research, backlink analysis |
 
-### Reporting & Analytics
+#### Reporting & Analytics
 | Tool | Purpose |
 |------|---------|
-| [Google Analytics 4](https://analytics.google.com) | Traffic, sessions, conversion events |
-| [Vercel Analytics](https://vercel.com/analytics) | Real-time Web Vitals from real users, zero config |
-| [Hotjar](https://hotjar.com) | Heatmaps, session recordings, form analytics |
-| [Clarity (Microsoft)](https://clarity.microsoft.com) | Free heatmaps + session recordings |
+| [Google Analytics 4](https://analytics.google.com) | Traffic, sessions, conversions (add `NEXT_PUBLIC_GA_ID` to enable) |
+| [Vercel Analytics](https://vercel.com/analytics) | Real-user Web Vitals, zero config |
+| [Hotjar](https://hotjar.com) | Heatmaps, session recordings |
+| [Microsoft Clarity](https://clarity.microsoft.com) | Free heatmaps + session recordings |
 
-### Troubleshooting
+#### Troubleshooting
 | Tool | Purpose |
 |------|---------|
-| [Vercel logs](https://vercel.com/docs/observability/runtime-logs) | Runtime errors, edge function logs |
-| Chrome DevTools | Network tab, console errors, performance profiling |
-| [Sentry](https://sentry.io) | Error tracking with stack traces in production |
-| `next build` + `next start` | Reproduce production builds locally before deploy |
+| Vercel runtime logs | Dashboard → Deployments → Functions tab |
+| Chrome DevTools | Network, console, performance profiling |
+| [Sentry](https://sentry.io) | Production error tracking with stack traces |
 
-### Productivity
+#### Productivity
 | Tool | Purpose |
 |------|---------|
-| [Claude Code](https://claude.ai/code) | AI pair programming, component generation, debugging |
-| [Vercel CLI](https://vercel.com/docs/cli) | Deploy, preview, env management from terminal |
-| GitHub Actions | CI/CD — lint + build check on every PR |
-| Turborepo (if monorepo) | Parallel builds, task caching |
+| [Claude Code](https://claude.ai/code) | AI pair programming — used to build this project |
+| [Vercel CLI](https://vercel.com/docs/cli) | Deploy and manage env vars from the terminal |
 
-### Usability Improvement
+#### Usability
 | Tool | Purpose |
 |------|---------|
-| [Hotjar](https://hotjar.com) | Identify rage clicks, scroll depth, drop-off points |
-| [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Automated accessibility + performance audits on every deploy |
-| [WAVE](https://wave.webaim.org) | Accessibility audit (WCAG compliance) |
-| [axe DevTools](https://www.deque.com/axe/) | Browser extension for a11y issues |
-| Real user feedback | WhatsApp + chat widget as direct feedback channels |
+| [Hotjar](https://hotjar.com) | Rage clicks, scroll depth, drop-off analysis |
+| [WAVE](https://wave.webaim.org) | Accessibility audit (WCAG) |
+| Built-in WhatsApp + AI chat | Direct patient feedback channel |
 
-### Landing Page Creation
+#### Landing Page Creation
 | Tool | Purpose |
 |------|---------|
-| [v0.dev](https://v0.dev) | AI-generated React component scaffolding |
-| [Claude Code](https://claude.ai/code) | Full landing page generation from a brief |
-| [Figma](https://figma.com) | Design mockups before coding |
+| [Claude Code](https://claude.ai/code) | Full landing generation from a brief |
+| [Figma](https://figma.com) | Design mockups |
+| [Spline](https://spline.design) / [Sketchfab](https://sketchfab.com) | GLB 3D model sourcing |
 | [Coolors](https://coolors.co) | Color palette generation |
-| [Google Fonts](https://fonts.google.com) | Typography selection |
-| [Spline](https://spline.design) / Sketchfab | 3D model sourcing (GLB format) |
+
+---
+
+## How to Present This Project (2-min talking points)
+
+**"What tools do you use for SEO?"**
+
+> Sitemap and robots.txt are auto-generated by Next.js itself. I add JSON-LD structured data (LocalBusiness + Dentist schema) so Google understands the business directly. Then I connect Google Search Console to monitor keyword performance and PageSpeed Insights to keep Core Web Vitals healthy. For deeper competitor analysis I use Ahrefs or Semrush.
+
+**"Reporting and analytics?"**
+
+> Google Analytics 4 for the baseline — traffic, sessions, conversions. But the most powerful thing I use now is Vercel Analytics, which gives real Web Vitals from real users with zero setup. For behavior I layer in Hotjar or Microsoft Clarity — heatmaps and session recordings so you can see exactly where users click and where they drop off.
+
+**"Troubleshooting in production?"**
+
+> First I check Vercel's runtime logs directly from the dashboard. For complex errors I add Sentry, which sends the full stack trace with user context when something breaks. And I always reproduce locally with `next build && next start` before deploying — that alone prevents 80% of production issues.
+
+**"Productivity?"**
+
+> Claude Code for AI pair programming — I generated most of this landing's components and debugged with it in real time. Vercel CLI to deploy and manage environment variables from the terminal without touching the dashboard.
+
+**"Usability improvements?"**
+
+> Hotjar shows me rage clicks — those are the friction points. I run Lighthouse audits on every deploy to catch accessibility regressions before users do. And the WhatsApp button plus the AI chat widget work as a direct feedback channel from real patients.
+
+**"How do you build a landing like this?"**
+
+> I start with a brief and use Claude Code to generate the section structure. For 3D assets I pull GLB models from Spline or Sketchfab. Design system comes from Figma if the client has brand guidelines, or I build a palette with Coolors. Then I wire up the AI chat with Gemini and deploy to Vercel in one command.
 
 ---
 
