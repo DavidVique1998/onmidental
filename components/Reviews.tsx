@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { motion } from "motion/react";
 import { Star, ExternalLink } from "lucide-react";
 
@@ -25,16 +26,28 @@ const reviews = [
     text: "Llevo años viniendo a esta clínica y siempre he tenido una atención excelente. El Dr. Zárate es muy profesional y explica todo con detalle.",
     date: "Hace 3 semanas",
   },
+  {
+    author: "María José T.",
+    initial: "M",
+    rating: 5,
+    text: "El trato es inmejorable y los resultados hablan por sí solos. Recomiendo la clínica a todo el mundo sin ninguna duda.",
+    date: "Hace 1 semana",
+  },
+  {
+    author: "Alejandro V.",
+    initial: "A",
+    rating: 5,
+    text: "Desde el primer momento me explicaron todo el proceso con mucha claridad. El resultado de mis implantes es perfecto.",
+    date: "Hace 2 meses",
+  },
+  {
+    author: "Silvia M.",
+    initial: "S",
+    rating: 5,
+    text: "Muy contenta con el blanqueamiento. Profesionales atentos y clínica muy moderna. ¡Volvería sin dudarlo!",
+    date: "Hace 3 semanas",
+  },
 ];
-
-const cardsContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-};
-const cardVariant = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-};
 
 function Stars({ count }: { count: number }) {
   return (
@@ -42,17 +55,61 @@ function Stars({ count }: { count: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          size={14}
-          className={
-            i < count ? "text-[#F5A623] fill-[#F5A623]" : "text-[#111111]/10 fill-[#111111]/10"
-          }
+          size={13}
+          className={i < count ? "text-[#F5A623] fill-[#F5A623]" : "text-[#111111]/10 fill-[#111111]/10"}
         />
       ))}
     </div>
   );
 }
 
+type Review = (typeof reviews)[0];
+
+function ReviewCard({ author, initial, rating, text, date }: Review) {
+  return (
+    <div className="bg-[#FAFAF8] border border-[#111111]/[0.06] rounded-2xl p-7 relative w-full">
+      <span className="absolute top-5 right-6 text-[80px] leading-none text-[#111111]/[0.04] font-serif select-none">
+        "
+      </span>
+      <Stars count={rating} />
+      <p className="text-[#111111]/70 text-sm leading-relaxed mt-4 mb-6 line-clamp-4">{text}</p>
+      <div className="flex items-center gap-3 pt-4 border-t border-[#111111]/[0.06]">
+        <div className="w-9 h-9 rounded-full bg-[#C9956A]/15 flex items-center justify-center text-[#C9956A] font-extrabold text-sm shrink-0">
+          {initial}
+        </div>
+        <div>
+          <p className="text-[#111111] font-bold text-sm">{author}</p>
+          <p className="text-[#111111]/35 text-xs">{date}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewColumn({ items, duration, className }: { items: Review[]; duration: number; className?: string }) {
+  return (
+    <div className={className ?? ""}>
+      <motion.div
+        animate={{ translateY: "-50%" }}
+        transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
+        className="flex flex-col gap-5 pb-5"
+      >
+        {[...new Array(2).fill(0)].map((_, idx) => (
+          <React.Fragment key={idx}>
+            {items.map((r, i) => (
+              <ReviewCard key={`${idx}-${i}`} {...r} />
+            ))}
+          </React.Fragment>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Reviews() {
+  const col1 = reviews.slice(0, 3);
+  const col2 = reviews.slice(3, 6);
+
   return (
     <section className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
@@ -100,7 +157,7 @@ export default function Reviews() {
               <p className="text-[#111111]/40 text-xs">58 reseñas</p>
             </div>
             <div className="w-px h-12 bg-[#111111]/[0.06]" />
-            <svg viewBox="0 0 74 24" width="74" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 74 24" width="74" height="24" fill="none">
               <text x="0" y="19" fontSize="20" fontWeight="800" fontFamily="Arial,sans-serif" fill="#4285F4">G</text>
               <text x="15" y="19" fontSize="20" fontWeight="800" fontFamily="Arial,sans-serif" fill="#EA4335">o</text>
               <text x="27" y="19" fontSize="20" fontWeight="800" fontFamily="Arial,sans-serif" fill="#FBBC05">o</text>
@@ -111,41 +168,16 @@ export default function Reviews() {
           </motion.div>
         </div>
 
-        {/* Review cards */}
+        {/* Scrolling columns */}
         <motion.div
-          variants={cardsContainer}
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="[mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[560px] overflow-hidden grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12"
         >
-          {reviews.map((review) => (
-            <motion.div
-              key={review.author}
-              variants={cardVariant}
-              whileHover={{ y: -6, transition: { type: "spring", stiffness: 400, damping: 25 } }}
-              className="bg-[#FAFAF8] border border-[#111111]/[0.06] rounded-2xl p-7 relative hover:shadow-lg transition-shadow duration-300 cursor-default"
-            >
-              <span className="absolute top-5 right-6 text-[80px] leading-none text-[#111111]/[0.04] font-serif select-none">
-                "
-              </span>
-
-              <Stars count={review.rating} />
-              <p className="text-[#111111]/70 text-sm leading-relaxed mt-4 mb-6 line-clamp-4">
-                {review.text}
-              </p>
-
-              <div className="flex items-center gap-3 pt-4 border-t border-[#111111]/[0.06]">
-                <div className="w-9 h-9 rounded-full bg-[#C9956A]/15 flex items-center justify-center text-[#C9956A] font-extrabold text-sm shrink-0">
-                  {review.initial}
-                </div>
-                <div>
-                  <p className="text-[#111111] font-bold text-sm">{review.author}</p>
-                  <p className="text-[#111111]/35 text-xs">{review.date}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <ReviewColumn items={col1} duration={18} />
+          <ReviewColumn items={col2} duration={22} className="hidden sm:block" />
         </motion.div>
 
         {/* CTA */}

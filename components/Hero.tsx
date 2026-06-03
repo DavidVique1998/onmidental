@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown, Star, StarHalf } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 const ToothScene = dynamic(() => import("./ToothScene"), { ssr: false });
 
@@ -83,24 +84,28 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.72 }}
                 className="flex flex-wrap gap-4"
               >
-                <a
-                  href="https://wa.me/34623219399"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 bg-[#111111] hover:bg-[#C9956A] text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-sm uppercase tracking-[0.15em]"
-                >
-                  Pide tu cita
-                  <ArrowRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform duration-300"
-                  />
-                </a>
-                <a
-                  href="#servicios"
-                  className="inline-flex items-center gap-2 border border-[#111111]/[0.18] hover:border-[#111111] text-[#111111]/55 hover:text-[#111111] font-bold px-8 py-4 rounded-full transition-all duration-300 text-sm uppercase tracking-[0.15em]"
-                >
-                  Ver servicios
-                </a>
+                <MagneticButton>
+                  <a
+                    href="https://wa.me/34623219399"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2.5 bg-[#111111] hover:bg-[#C9956A] text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-sm uppercase tracking-[0.15em]"
+                  >
+                    Pide tu cita
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform duration-300"
+                    />
+                  </a>
+                </MagneticButton>
+                <MagneticButton>
+                  <a
+                    href="#servicios"
+                    className="inline-flex items-center gap-2 border border-[#111111]/[0.18] hover:border-[#111111] text-[#111111]/55 hover:text-[#111111] font-bold px-8 py-4 rounded-full transition-all duration-300 text-sm uppercase tracking-[0.15em]"
+                  >
+                    Ver servicios
+                  </a>
+                </MagneticButton>
               </motion.div>
 
               {/* Trust bar */}
