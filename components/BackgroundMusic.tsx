@@ -2,9 +2,8 @@
 
 import { useRef, useState } from "react";
 
-// Royalty-free music — Pixabay free license (no attribution required)
-// Replace src with any royalty-free .mp3 URL from pixabay.com/music
-const MUSIC_SRC = "https://cdn.pixabay.com/audio/2024/02/28/audio_736b4e2a43.mp3";
+// Gymnopedie No 1 — Kevin MacLeod (incompetech.com) CC BY 4.0
+const MUSIC_SRC = "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Gymnopedie%20No%201.mp3";
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
