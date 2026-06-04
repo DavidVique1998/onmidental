@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Gymnopedie No 1 — Kevin MacLeod (incompetech.com) CC BY 4.0
 const MUSIC_SRC = "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Gymnopedie%20No%201.mp3";
@@ -8,6 +8,13 @@ const MUSIC_SRC = "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Gy
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.35;
+    audio.play().then(() => setPlaying(true)).catch(() => {});
+  }, []);
 
   const toggle = async () => {
     const audio = audioRef.current;
@@ -25,7 +32,7 @@ export default function BackgroundMusic() {
 
   return (
     <>
-      <audio ref={audioRef} src={MUSIC_SRC} loop preload="none" />
+      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" />
       <button
         onClick={toggle}
         aria-label={playing ? "Silenciar música" : "Reproducir música"}
