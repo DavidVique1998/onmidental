@@ -31,7 +31,7 @@ export default function BackgroundMusic() {
         onClick={toggle}
         aria-label={playing ? "Silenciar música" : "Reproducir música"}
         title={playing ? "Silenciar" : "Música de fondo"}
-        className="fixed top-[18px] right-[72px] z-[9990] w-9 h-9 rounded-full bg-white/95 backdrop-blur-md border border-[#111111]/10 shadow-sm flex items-center justify-center text-[#111111]/45 hover:text-[#C9956A] hover:border-[#C9956A]/40 hover:shadow-md transition-all duration-300"
+        className="fixed bottom-24 left-5 z-[9990] w-9 h-9 rounded-full bg-white/95 backdrop-blur-md border border-[#111111]/10 shadow-sm flex items-center justify-center text-[#111111]/45 hover:text-[#C9956A] hover:border-[#C9956A]/40 hover:shadow-md transition-all duration-300"
       >
         {playing ? <SoundOnIcon /> : <SoundOffIcon />}
       </button>
