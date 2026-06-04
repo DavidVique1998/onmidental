@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import MotionProvider from "@/components/MotionProvider";
 import CursorFollower from "@/components/CursorFollower";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import { GA_ID } from "@/lib/gtag";
 
 const inter = Inter({
@@ -380,6 +381,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        <BackgroundMusic />
         <CursorFollower />
         <MotionProvider>{children}</MotionProvider>
       </body>
